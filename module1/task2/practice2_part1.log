@@ -1,0 +1,276 @@
+eltex-pg2-v6@eltex:~/.ssh$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/eltex-pg2-v6/.ssh/id_rsa
+Your public key has been saved in /home/eltex-pg2-v6/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:j4wjsADmLqnLqBD1nWP5ul775QiLPoMSc+hp/d0rDe0 eltex-pg2-v6@eltex
+The key's randomart image is:
++---[RSA 4096]----+
+|                 |
+|                 |
+|...              |
+|+. . . o         |
+|o.... * S.       |
+|.++o.. =.o.      |
+|+o.*..o *+. .    |
+|* = o.o*.=E+     |
+|*+ . +B++o=..    |
++----[SHA256]-----+
+
+eltex-pg2-v6@eltex:~/.ssh$ ssh-copy-id root@172.16.9.206
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/eltex-pg2-v6/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@172.16.9.206's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@172.16.9.206'"
+and check to make sure that only the key(s) you wanted were added.
+
+eltex-pg2-v6@eltex:~$ cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCji70Bl1/pCvwluYMdcHMCe3Gwft0pAreE2CPhCiX1ZaC4qKbT7S58P0HH7DTLNUNA3q9/G2Hd+9PfcvRwEx/5DJmSCEJsVfb6uWpZOpXqZeXYiujSm5yf6XA/BpXogfkgdLlK1goJJdS9Aw8CKlKKKotFb8KmAYRiq23xUivejvy/qKXumyluw5nHKqw2cawofkDezHlWdfC0V+gagAWlnPiYq4g5H0nQpPwrRRzQyN1kDuXGWTwhT1eXGoV/qv9GrxexcC6rKrIDg17GvGC14WAADNMZBWJlA1N9RWGpuui60rVx6facCFP6yI0Zy4emiJjKXT8QcsSKS19TrTzvyQDCydpvMquS84y9FlRGKb00tPjV34Bjs0poX/+ncWy+vbrwHR8wgrdr4i0pI5Sl6OqfVXsUwoQoRhMt22R4omJwsKgRzujZw8fh9EhxLFU5yRqDNckRXOQzZEl8rUhE4Rnj93KIUV1TjNu5nBSEf35BFEnQlbZuH5g57K5K33FTDzjGnn5Uhci/AEtU0FtgK088AVBCOzfMSOYOfMdE8RKurDELeeVv1jnSEIxBxfdGujW4srV+pOJlAHETvkLpdRbL/RRKST4z2msbxzPJK+U3wqJ9RmGcn0iOdW2Gkmc5CL3G5BAzrhHQnk8wugYTLjWiYYDkTGi2zuR9h2qftw== eltex-pg2-v6@eltex
+eltex-pg2-v6@eltex:~$ ls -l ~/.ssh/id_rsa.pub
+-rw-r--r-- 1 eltex-pg2-v6 eltex-pg2-v6 744 Mar 13 17:12 /home/eltex-pg2-v6/.ssh/id_rsa.pub
+
+eltex-pg2-v6@eltex:~$ ssh root@172.16.9.206
+Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-55-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Mar 13 10:17:50 AM UTC 2025
+
+  System load:  0.0                Processes:              114
+  Usage of /:   37.8% of 14.66GB   Users logged in:        1
+  Memory usage: 6%                 IPv4 address for ens18: 172.16.9.206
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Thu Mar 13 10:08:54 2025 from 172.16.8.2
+root@eltex-practice2-pg2-v6:~# cat ~/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCji70Bl1/pCvwluYMdcHMCe3Gwft0pAreE2CPhCiX1ZaC4qKbT7S58P0HH7DTLNUNA3q9/G2Hd+9PfcvRwEx/5DJmSCEJsVfb6uWpZOpXqZeXYiujSm5yf6XA/BpXogfkgdLlK1goJJdS9Aw8CKlKKKotFb8KmAYRiq23xUivejvy/qKXumyluw5nHKqw2cawofkDezHlWdfC0V+gagAWlnPiYq4g5H0nQpPwrRRzQyN1kDuXGWTwhT1eXGoV/qv9GrxexcC6rKrIDg17GvGC14WAADNMZBWJlA1N9RWGpuui60rVx6facCFP6yI0Zy4emiJjKXT8QcsSKS19TrTzvyQDCydpvMquS84y9FlRGKb00tPjV34Bjs0poX/+ncWy+vbrwHR8wgrdr4i0pI5Sl6OqfVXsUwoQoRhMt22R4omJwsKgRzujZw8fh9EhxLFU5yRqDNckRXOQzZEl8rUhE4Rnj93KIUV1TjNu5nBSEf35BFEnQlbZuH5g57K5K33FTDzjGnn5Uhci/AEtU0FtgK088AVBCOzfMSOYOfMdE8RKurDELeeVv1jnSEIxBxfdGujW4srV+pOJlAHETvkLpdRbL/RRKST4z2msbxzPJK+U3wqJ9RmGcn0iOdW2Gkmc5CL3G5BAzrhHQnk8wugYTLjWiYYDkTGi2zuR9h2qftw== eltex-pg2-v6@eltex
+root@eltex-practice2-pg2-v6:~# ls -l ~/.ssh/authorized_keys
+-rw------- 1 root root 744 Mar 13 10:15 /root/.ssh/authorized_keys
+
+
+
+
+
+
+root@eltex-practice2-pg2-v6:~# adduser user2
+info: Adding user `user2' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user2' (1002) ...
+info: Adding new user `user2' (1002) with group `user2 (1002)' ...
+info: Creating home directory `/home/user2' ...
+info: Copying files from `/etc/skel' ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for user2
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+info: Adding new user `user2' to supplemental / extra groups `users' ...
+info: Adding user `user2' to group `users' ...
+root@eltex-practice2-pg2-v6:~# adduser user3
+info: Adding user `user3' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user3' (1003) ...
+info: Adding new user `user3' (1003) with group `user3 (1003)' ...
+info: Creating home directory `/home/user3' ...
+info: Copying files from `/etc/skel' ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for user3
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+info: Adding new user `user3' to supplemental / extra groups `users' ...
+info: Adding user `user3' to group `users' ...
+
+root@eltex-practice2-pg2-v6:~# usermod -s /usr/sbin/nologin user3
+root@eltex-practice2-pg2-v6:~# cat /etc/passwd | grep user3
+user3:x:1003:1003:,,,:/home/user3:/usr/sbin/nologin
+root@eltex-practice2-pg2-v6:~# su - user3
+This account is currently not available.
+root@eltex-practice2-pg2-v6:~# su -s /bin/bash user3
+user3@eltex-practice2-pg2-v6:/root$ logout
+bash: logout: not login shell: use `exit'
+user3@eltex-practice2-pg2-v6:/root$ exit
+exit
+root@eltex-practice2-pg2-v6:~# 
+
+root@eltex-practice2-pg2-v6:~# groupadd extrausers
+root@eltex-practice2-pg2-v6:~# cat /etc/group | grep extrausers
+extrausers:x:1004:
+root@eltex-practice2-pg2-v6:~# usermod -aG extrausers user1
+root@eltex-practice2-pg2-v6:~# usermod -aG extrausers user2
+root@eltex-practice2-pg2-v6:~# usermod -aG extrausers user3
+root@eltex-practice2-pg2-v6:~# cat /etc/group | grep extrausers
+extrausers:x:1004:user1,user2,user3
+root@eltex-practice2-pg2-v6:~# id user1
+uid=1001(user1) gid=1001(user1) groups=1001(user1),1004(extrausers)
+root@eltex-practice2-pg2-v6:~# id user2
+uid=1002(user2) gid=1002(user2) groups=1002(user2),100(users),1004(extrausers)
+root@eltex-practice2-pg2-v6:~# id user3
+uid=1003(user3) gid=1003(user3) groups=1003(user3),100(users),1004(extrausers)
+
+root@eltex-practice2-pg2-v6:~# mkdir -p /opt/share
+root@eltex-practice2-pg2-v6:~# chown :extrausers /opt/share
+root@eltex-practice2-pg2-v6:~# ls -ld /opt/share
+drwxr-xr-x 2 root extrausers 4096 Mar 14 16:44 /opt/share
+root@eltex-practice2-pg2-v6:~# chmod g+rwx /opt/share
+root@eltex-practice2-pg2-v6:~# chmod g+s /opt/share
+root@eltex-practice2-pg2-v6:~# ls -ld /opt/share
+drwxrwsr-x 2 root extrausers 4096 Mar 14 16:44 /opt/share
+
+root@eltex-practice2-pg2-v6:~# echo "umask 007" >> /home/user1/.bashrc
+root@eltex-practice2-pg2-v6:~# echo "umask 007" >> /home/user1/.profile
+root@eltex-practice2-pg2-v6:~# su - user1
+user1@eltex-practice2-pg2-v6:~$ umask
+0007
+
+root@eltex-practice2-pg2-v6:~# su - user1 -c 'touch /opt/share/file_user1.txt'
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'touch /opt/share/file_user2.txt'
+root@eltex-practice2-pg2-v6:~# su -s /bin/bash -c 'touch /opt/share/file_user3.txt' user3
+root@eltex-practice2-pg2-v6:~# ls -l /opt/share
+total 0
+-rw-rw---- 1 user1 extrausers 0 Mar 17 06:27 file_user1.txt
+-rw-rw-r-- 1 user2 extrausers 0 Mar 17 06:27 file_user2.txt
+-rw-rw-r-- 1 user3 extrausers 0 Mar 17 06:31 file_user3.txt
+root@eltex-practice2-pg2-v6:~# ls -ld /opt/share
+drwxrwsr-x 2 root extrausers 4096 Mar 17 06:36 /opt/share
+root@eltex-practice2-pg2-v6:~# su - user1 -c 'rm /opt/share/file_user2.txt'
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'rm /opt/share/file_user3.txt'
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'rm /opt/share/file_user1.txt'
+root@eltex-practice2-pg2-v6:~# ls -l /opt/share
+total 0
+
+root@eltex-practice2-pg2-v6:~# chmod +t /opt/share
+root@eltex-practice2-pg2-v6:~# ls -ld /opt/share
+drwxrwsr-t 2 root extrausers 4096 Mar 17 06:40 /opt/share
+root@eltex-practice2-pg2-v6:~# su - user1 -c 'touch /opt/share/file_user1.txt'
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'touch /opt/share/file_user2.txt'
+root@eltex-practice2-pg2-v6:~# su -s /bin/bash -c 'touch /opt/share/file_user3.txt' user3
+root@eltex-practice2-pg2-v6:~# ls -l /opt/share
+total 0
+-rw-rw---- 1 user1 extrausers 0 Mar 17 06:52 file_user1.txt
+-rw-rw-r-- 1 user2 extrausers 0 Mar 17 06:52 file_user2.txt
+-rw-rw-r-- 1 user3 extrausers 0 Mar 17 06:52 file_user3.txt
+root@eltex-practice2-pg2-v6:~# su - user1 -c 'rm /opt/share/file_user2.txt'
+rm: cannot remove '/opt/share/file_user2.txt': Operation not permitted
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'rm /opt/share/file_user3.txt'
+rm: cannot remove '/opt/share/file_user3.txt': Operation not permitted
+root@eltex-practice2-pg2-v6:~# su - user2 -c 'rm /opt/share/file_user1.txt'
+rm: cannot remove '/opt/share/file_user1.txt': Operation not permitted
+
+root@eltex-practice2-pg2-v6:~# visudo
+user1 ALL=(ALL) NOPASSWD: /bin/dmesg
+Ну тут вызов и оно работает, просто не стал место забивать
+root@eltex-practice2-pg2-v6:~# vi /usr/local/bin/dmesg_user2.sh
+#!/bin/bash
+/bin/dmesg "$@"
+root@eltex-practice2-pg2-v6:~# chmod +x /usr/local/bin/dmesg_user2.sh
+uroot@eltex-practice2-pg2-v6:~# chown root:root /usr/local/bin/dmesg_user2.sh
+root@eltex-practice2-pg2-v6:~# chmod 4755 /usr/local/bin/dmesg_user2.sh
+user2@eltex-practice2-pg2-v6:~$ /usr/local/bin/dmesg_user2.sh
+dmesg: read kernel buffer failed: Operation not permitted
+root@eltex-practice2-pg2-v6:~# sysctl -w kernel.dmesg_restrict=0
+И теперь можно исполнять файл из под второго пользователя
+Проблема: Ядро блокировало доступ к сообщениям для всех, кроме root, даже если запускать через SUID-скрипт.
+Решение: Выключив эту защиту (kernel.dmesg_restrict=0), мы разрешили всем читать сообщения ядра, и команда dmesg стала работать без ошибок.
+
+root@eltex-practice2-pg2-v6:~# chage -l user1
+Last password change					: Mar 13, 2025
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+root@eltex-practice2-pg2-v6:~# chage -M 10 user1
+root@eltex-practice2-pg2-v6:~# chage -M 10 user2
+root@eltex-practice2-pg2-v6:~# chage -M 10 user3
+root@eltex-practice2-pg2-v6:~# chage -l user1
+Last password change					: Mar 13, 2025
+Password expires					: Mar 23, 2025
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 10
+Number of days of warning before password expires	: 7
+
+root@eltex-practice2-pg2-v6:~# vi /etc/motd
+root@eltex-practice2-pg2-v6:~# cat /etc/motd
+С возвращением, Егор Земляной!
+
+root@eltex-practice2-pg2-v6:~# mkdir -p /root/etc_backup
+root@eltex-practice2-pg2-v6:~# rsync -av /etc/ /root/etc_backup/
+root@eltex-practice2-pg2-v6:~# ls -l /root/etc_backup
+total 924
+
+root@eltex-practice2-pg2-v6:~# tar -czf etc_backup.tar.gz /root/etc_backup
+root@eltex-practice2-pg2-v6:~# tar -cjf etc_backup.tar.bz2 /root/etc_backup
+root@eltex-practice2-pg2-v6:~# tar -cf - /root/etc_backup | 7z a -si etc_backup.tar.7z
+root@eltex-practice2-pg2-v6:~# ls -lh /root/etc_backup.tar.*
+-rw-r--r-- 1 root root 475K Mar 17 11:29 /root/etc_backup.tar.7z
+-rw-r--r-- 1 root root 553K Mar 17 11:43 /root/etc_backup.tar.bz2
+-rw-r--r-- 1 root root 582K Mar 17 11:22 /root/etc_backup.tar.gz
+
+root@eltex-practice2-pg2-v6:~# tar -czf etc_backup.tar.gz /root/etc_backup^C
+root@eltex-practice2-pg2-v6:~# echo 'date "+%Y-%m-%d %H:%M:%S"' >> /etc/motd
+root@eltex-practice2-pg2-v6:~# cat /etc/motd
+С возвращением, Егор Земляной!
+date "+%Y-%m-%d %H:%M:%S"
+root@eltex-practice2-pg2-v6:~# rsync -a /etc/ /root/etc_backup/
+root@eltex-practice2-pg2-v6:~# cat /root/etc_backup/motd
+С возвращением, Егор Земляной!
+date "+%Y-%m-%d %H:%M:%S"
+root@eltex-practice2-pg2-v6:~# tar -czf motd_backup.tar.gz /root/etc_backup/motd
+tar: Removing leading `/' from member names
+root@eltex-practice2-pg2-v6:~# ls -lh motd_backup.tar.gz
+-rw-r--r-- 1 root root 223 Mar 17 11:39 motd_backup.tar.gz
+
+root@eltex-practice2-pg2-v6:~# mkdir /tmp/etc_backup_extract
+root@eltex-practice2-pg2-v6:~# tar -xjf etc_backup.tar.bz2 -C /tmp/etc_backup_extract
+root@eltex-practice2-pg2-v6:~# diff -r etc_backup /tmp/etc_backup_extract/root/etc_backup 2>/dev/null
+diff -r etc_backup/motd /tmp/etc_backup_extract/root/etc_backup/motd
+2c2
+< 2025-03-17 11:50:41
+---
+> date "+%Y-%m-%d %H:%M:%S"
+
+
+root@eltex-practice2-pg2-v6:~# mkdir /tmp/etc_backup_extract/gzip
+root@eltex-practice2-pg2-v6:~# mkdir /tmp/etc_backup_extract/7zip
+root@eltex-practice2-pg2-v6:~# tar -xzf etc_backup.tar.gz -C /tmp/etc_backup_extract/gzip
+root@eltex-practice2-pg2-v6:~# 7z x etc_backup.tar.7z -o/tmp/etc_backup_extract/7zip
+root@eltex-practice2-pg2-v6:~# tar -xf /tmp/etc_backup_extract/7zip/etc_backup.tar -C /tmp/etc_backup_extract/7zip
+root@eltex-practice2-pg2-v6:~# diff /tmp/etc_backup_extract/gzip/root/etc_backup/motd /tmp/etc_backup_extract/7zip/root/etc_backup/motd
+Отличий нет

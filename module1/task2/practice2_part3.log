@@ -1,0 +1,139 @@
+У меня пункты 1-8 не сохранились, поэтому достал их из истории:
+  309  git --version
+  310  git config --global user.name "EgZeml"
+  311  git config --global user.email "egor.zemlyanoi.2020@gmail.com"
+  312  git config --global init.defaultBranch main
+  313  git config --global --list
+  314  apt update
+  315  apt install git -y
+  316  apt install gh -y
+  317  gh --version
+  318  ssh-keygen -t ed25519 -f ~/.ssh/EgZeml
+  319  gh auth login
+  320  gh auth setup-git --hostname github.com
+  321  gh auth status
+  322  gh repo create --public Eltex_school_spring
+
+root@eltex-practice2-pg2-v6:~# mkdir ~/Eltex_school_spring
+root@eltex-practice2-pg2-v6:~# cd ~/Eltex_school_spring
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# echo "# краткое_описание_репозитория" >> README.md
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git init
+Initialized empty Git repository in /root/Eltex_school_spring/.git/
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git add README.md
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git commit -m "first commit"
+[main (root-commit) 84865fc] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git branch -M main
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git remote add origin https://github.com/EgZeml/Eltex_school_spring.git
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git status
+On branch main
+nothing to commit, working tree clean
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 271 bytes | 271.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/EgZeml/Eltex_school_spring.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# mkdir -p module1/task1
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# mkdir module1/task2
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# mkdir module1/task3
+eltex-pg2-v6@eltex:~$ scp /home/eltex-pg2-v6/eltex-pg2-v6_part1.odt root@172.16.9.206:~/Eltex_school_spring/module1/task1/
+eltex-pg2-v6_part1.odt                        100% 1525KB 125.5MB/s   00:00    
+eltex-pg2-v6@eltex:~$ scp /home/eltex-pg2-v6/eltex-pg2-v6_part2.log root@172.16.9.206:~/Eltex_school_spring/module1/task1/
+eltex-pg2-v6_part2.log                        100%   14KB  18.2MB/s   00:00    
+eltex-pg2-v6@eltex:~$ scp /home/eltex-pg2-v6/eltex-pg2-v6_part3.log root@172.16.9.206:~/Eltex_school_spring/module1/task1/
+eltex-pg2-v6_part3.log                        100% 1061     3.0MB/s   00:00    
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git add .
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   module1/task1/eltex-pg2-v6_part1.odt
+	new file:   module1/task1/eltex-pg2-v6_part2.log
+	new file:   module1/task1/eltex-pg2-v6_part3.log
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git commit -m "Добавлены отчеты в module1/task1-3"
+[main 227550e] Добавлены отчеты в module1/task1-3
+ 3 files changed, 279 insertions(+)
+ create mode 100644 module1/task1/eltex-pg2-v6_part1.odt
+ create mode 100644 module1/task1/eltex-pg2-v6_part2.log
+ create mode 100644 module1/task1/eltex-pg2-v6_part3.log
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 1.31 MiB | 1.83 MiB/s, done.
+Total 7 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/EgZeml/Eltex_school_spring.git
+   84865fc..227550e  main -> main
+root@eltex-practice2-pg2-v6:~# mkdir ~/Eltex_school_spring_clone && cd ~/Eltex_school_spring_clone
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# git clone https://github.com/EgZeml/Eltex_school_spring.git .
+Cloning into '.'...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 10 (delta 0), reused 10 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (10/10), 1.31 MiB | 2.49 MiB/s, done.
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# cd ~/Eltex_school_spring
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# echo "Вносим изменения" >> README.md
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git add README.md
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git commit -m "Обновлен README: добавлена строка"
+[main cb225a7] Обновлен README: добавлена строка
+ 1 file changed, 1 insertion(+)
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 406 bytes | 406.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/EgZeml/Eltex_school_spring.git
+   227550e..cb225a7  main -> main
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring# cd ~/Eltex_school_spring_clone
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# git fetch
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 386 bytes | 386.00 KiB/s, done.
+From https://github.com/EgZeml/Eltex_school_spring
+   227550e..cb225a7  main       -> origin/main
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# git log origin/main
+commit cb225a7b768ecc83185bad37b12c10d352d25c99 (origin/main, origin/HEAD)
+Author: EgZeml <egor.zemlyanoi.2020@gmail.com>
+Date:   Sat Mar 22 14:48:39 2025 +0000
+
+    Обновлен README: добавлена строка
+
+commit 227550e93fa9c93209c5068da040b4919e2d0817 (HEAD -> main)
+Author: EgZeml <egor.zemlyanoi.2020@gmail.com>
+Date:   Sat Mar 22 06:07:42 2025 +0000
+
+    Добавлены отчеты в module1/task1-3
+
+commit 84865fc3fcb50b616b0ba4649f02a3b8a2422fe7
+Author: EgZeml <egor.zemlyanoi.2020@gmail.com>
+Date:   Fri Mar 21 12:47:27 2025 +0000
+
+    first commit
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# git diff main origin/main
+diff --git a/README.md b/README.md
+index aadab5e..3e29a8c 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,2 @@
+ # краткое_описание_репозитория
++Вносим изменения
+root@eltex-practice2-pg2-v6:~/Eltex_school_spring_clone# git pull
+Updating 227550e..cb225a7
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+
