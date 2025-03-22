@@ -1,0 +1,23 @@
+touch ${USER}_part3.log
+mkdir -p D1/D2/D3
+touch D1/D2/file.txt
+echo "Случайный текст" > D1/D2/file.txt
+ln -s ../file.txt D1/D2/D3/symlink
+ln D1/D2/file.txt D1/D2/D3/hardlink
+ls -l D1/D2/D3/symlink
+ls -l D1/D2/D3/hardlink
+mv D1/D2/file.txt D1/
+ls -l D1/D2/D3/symlink
+ls -l D1/D2/D3/hardlink
+Символическая ссылка стала битой, потому что указывала на конкретный файл, который мы переместили. А жёсткая ссылка работает, потому что она указывала на айнод, и ей чехать на перемещение файла.
+rm -rf D1/D2
+find / -type f -size +50M 2>/dev/null >> ${USER}_part3.log
+/proc/kcore
+/home/eltex-pg2-v23/eltex-pg2-v23_part.log
+/proc/kcore
+/home/eltex-pg2-v23/eltex-pg2-v23_part.log
+find ~ -type f -mtime -1
+which find
+file /usr/bin/find
+file /boot/initrd.img*
+Эти файлы — это архивы cpio, содержащие необходимые файлы для загрузки системы

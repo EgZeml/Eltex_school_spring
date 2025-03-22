@@ -1,0 +1,256 @@
+Script started on 2025-03-12 14:59:07+07:00 [TERM="screen.xterm-256color" TTY="/dev/pts/51" COLUMNS="80" LINES="24"]
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ exit[K[K[K[Kls
+ls           lsb_release  lsinitramfs  lslocks      lsmod        lspci
+lsattr       lscpu        lsipc        lslogins     lsns         lsusb
+lsblk        lsfd         lsirq        lsmem        lsof         
+[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ ls[K[Kecho $HIST
+$HISTCMD       $HISTCONTROL   $HISTFILE      $HISTFILESIZE  $HISTSIZE
+[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ echo $HISTАШДУ[K[K[K[KFILESIZE [K
+[?2004l2000
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ ls _A[K[K-A ~ | grep ''^'\'.'[C
+[?2004l.bash_history
+.bash_logout
+.bashrc
+.config
+.profile
+.report_part1.txt.swp
+.viminfo
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mexport HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexport HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ history
+[?2004l    1  2025-03-12 14:59:07 screen
+    2  2025-03-12 14:59:07 pwd
+    3  2025-03-12 14:59:07 w
+    4  2025-03-12 14:59:07 screen
+    5  2025-03-12 14:59:07 w
+    6  2025-03-12 14:59:07 screen -ls
+    7  2025-03-12 14:59:07 screen -r
+    8  2025-03-12 14:59:07 screen -ls
+    9  2025-03-12 14:59:07 screen -r top
+   10  2025-03-12 14:59:07 screen -ls
+   11  2025-03-12 14:59:07 screen -r top
+   12  2025-03-12 14:59:07 screen -ls
+   13  2025-03-12 14:59:07 session
+   14  2025-03-12 14:59:07 screen
+   15  2025-03-12 14:59:07 screen -ls
+   16  2025-03-12 14:59:07 logout
+   17  2025-03-12 14:59:07 screen -ls
+   18  2025-03-12 14:59:07 screen -r 199699
+   19  2025-03-12 14:59:07 screen -ls
+   20  2025-03-12 14:59:07 screen -r 199699
+   21  2025-03-12 14:59:07 logout
+   22  2025-03-12 14:59:07 pwd
+   23  2025-03-12 14:59:07 ls
+   24  2025-03-12 14:59:07 ls ./
+   25  2025-03-12 14:59:07 ls /home
+   26  2025-03-12 14:59:07 cd /home/pg2-v5
+   27  2025-03-12 14:59:07 cd /home/pg2-v5/
+   28  2025-03-12 14:59:07 cd /home/eltex-pg2-v5/
+   29  2025-03-12 14:59:07 cd /home/eltex-pg2-v6/
+   30  2025-03-12 14:59:07 pwd
+   31  2025-03-12 14:59:07 screen -ls
+   32  2025-03-12 14:59:07 pkill screen
+   33  2025-03-12 14:59:07 screen -ls
+   34  2025-03-12 14:59:07 screen
+   35  2025-03-12 14:59:07 screen -ls
+   36  2025-03-12 14:59:07 top
+   37  2025-03-12 14:59:07 watch /usr/bin/vmstat
+   38  2025-03-12 14:59:07 pwd
+   39  2025-03-12 14:59:07 vmstat
+   40  2025-03-12 14:59:07 vi report_part1.txt
+   41  2025-03-12 14:59:07 pwd
+   42  2025-03-12 14:59:07 ls
+   43  2025-03-12 14:59:07 ls
+   44  2025-03-12 14:59:07 pkill screen
+   45  2025-03-12 14:59:07 screen -ls
+   46  2025-03-12 14:59:07 screen
+   47  2025-03-12 14:59:07 screen -r
+   48  2025-03-12 14:59:07 screen -ls
+   49  2025-03-12 14:59:07 screen -r top
+   50  2025-03-12 14:59:07 screen
+   51  2025-03-12 14:59:07 screen -ls
+   52  2025-03-12 14:59:07 logout
+   53  2025-03-12 14:59:07 exit
+   54  2025-03-12 14:59:07 w
+   55  2025-03-12 14:59:07 top
+   56  2025-03-12 14:59:07 vi report_part1.txt
+   57  2025-03-12 14:59:07 ls
+   58  2025-03-12 14:59:07 car report_part1.txt 
+   59  2025-03-12 14:59:07 cat report_part1.txt 
+   60  2025-03-12 14:59:07 watch /usr/bin/vmstat
+   61  2025-03-12 14:59:07 screen -ls
+   62  2025-03-12 14:59:07 screen -pts-7.eltex
+   63  2025-03-12 14:59:07 screen -ls
+   64  2025-03-12 14:59:07 screen -r
+   65  2025-03-12 14:59:07 screen -r 851544
+   66  2025-03-12 14:59:07 screen -ls
+   67  2025-03-12 14:59:07 screen -r 844196
+   68  2025-03-12 14:59:07 ls
+   69  2025-03-12 14:59:07 cat report_part1.txt 
+   70  2025-03-12 14:59:07 screen -ls
+   71  2025-03-12 14:59:07 pkill screen
+   72  2025-03-12 14:59:07 screen -ls
+   73  2025-03-12 14:59:07 logout
+   74  2025-03-12 14:59:07 compgen -c ls
+   75  2025-03-12 14:59:07 screen -r
+   76  2025-03-12 14:59:07 cat /home/$USER/$USER_part.log
+   77  2025-03-12 14:59:07 exit
+   78  2025-03-12 14:59:07 script -a "$USER_part.log"
+   79  2025-03-12 14:59:07 cat /home/$USER/$USER_part.log
+   80  2025-03-12 14:59:07 exit
+   81  2025-03-12 14:59:07 ls
+   82  2025-03-12 14:59:07 screen -S "пользователь в системе_part2"
+   83  2025-03-12 14:59:07 screen ls
+   84  2025-03-12 14:59:07 screen -r
+   85  2025-03-12 14:59:07 exit
+   86  2025-03-12 10:42:12 echo $HISTFILESIZE
+   87  2025-03-12 10:48:08 ls -A ~ | grep '^.'
+   88  2025-03-12 10:52:50 ls -A ~ | grep '^\.' | cat -n
+   89  2025-03-12 10:55:10 echo $HISTTIMEFORMAT
+   90  2025-03-12 10:55:42 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
+   91  2025-03-12 10:55:52 history
+   92  2025-03-12 11:03:10 ls
+   93  2025-03-12 11:03:16 exit
+   94  2025-03-12 14:59:07 script -a "$USER_part.log"
+   95  2025-03-12 14:59:07 ls
+   96  2025-03-12 14:59:07 pkill script
+   97  2025-03-12 14:59:07 ls
+   98  2025-03-12 14:59:07 screen ls
+   99  2025-03-12 14:59:07 screen -ls 
+  100  2025-03-12 14:59:07 screen -S "пользователь в системе_part2"
+  101  2025-03-12 14:59:07 screen -ls
+  102  2025-03-12 14:59:07 screen -r
+  103  2025-03-12 14:59:07 ls
+  104  2025-03-12 14:59:07 pwd
+  105  2025-03-12 14:59:07 cd ~
+  106  2025-03-12 14:59:07 ls
+  107  2025-03-12 14:59:07 screen -r
+  108  2025-03-12 14:59:07 ls
+  109  2025-03-12 14:59:07 ls -A
+  110  2025-03-12 14:59:07 pkill script
+  111  2025-03-12 14:59:07 ls
+  112  2025-03-12 14:59:07 screen -r
+  113  2025-03-12 14:59:07 ls
+  114  2025-03-12 14:59:07 screen -ls
+  115  2025-03-12 14:59:07 exit
+  116  2025-03-12 15:05:55 echo $HISTFILESIZE
+  117  2025-03-12 15:06:49 ls -A ~ | grep '^\.'
+  118  2025-03-12 15:08:39 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
+  119  2025-03-12 15:08:53 history
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ date
+[?2004lWed Mar 12 03:10:24 PM +07 2025
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ history | tail -n 3
+[?2004l  119  2025-03-12 15:08:53 history
+  120  2025-03-12 15:10:24 date
+  121  2025-03-12 15:10:39 history | tail -n 3
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ tail -3n3 3[C ~/.bash_history
+[?2004lls
+screen -ls
+exit
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ уч[K[Kexport PROMPT_COMMAND=''h'i's't'o'r'y' '-'a'
+[?2004l[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ date
+[?2004lWed Mar 12 03:15:10 PM +07 2025
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ dateexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Ptail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3
+[?2004l  123  2025-03-12 15:14:57 export PROMPT_COMMAND='history -a'
+  124  2025-03-12 15:15:10 date
+  125  2025-03-12 15:15:14 history | tail -n 3
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ history | tail -n 3date[Kexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Ptail -n 3 ~/.bash_history
+[?2004ldate
+#1741767314
+history | tail -n 3
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3date[Kexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Ptail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3date[Khistoryexport HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[22Pls -A ~ | grep '^\.'[2Pecho $HISTFILESIZExit[Kcho $HISTFILESIZEls -A ~ | grep '^\.'export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Chistory[K[3Pdatehistory | tail -n 3tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdate[Khistory | tail -n 3tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ktail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3date[Kexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Ptail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdate[Khistory | tail -n 3tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kусрщ[K[K[K[Kecho ""T"E"[1P"s"t"[1P"[1P"e"s"t"
+[?2004lTest
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ echo "Test"tail -n 3 ~/.bash_history[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Phistory | tail -n 3date[Kexport PROMPT_COMMAND='history -a'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdate[Khistory | tail -n 3
+[?2004l  126  2025-03-12 15:15:20 tail -n 3 ~/.bash_history
+  127  2025-03-12 15:17:16 echo "Test"
+  128  2025-03-12 15:17:29 history | tail -n 3
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ history | tail -n 3[8Pecho "Test"tail -n 3 ~/.bash_history
+[?2004lecho "Test"
+#1741767449
+history | tail -n 3
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ DATE=$)[K[7m(date +"%Y-%m-%d")[27m(date +"%Y-%m-%d")
+[?2004l[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mecho $DATE[27mecho $DATE
+[?2004l2025-03-12
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mTIME=$(date +"%H:%M:%S")[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CTIME=$(date +"%H:%M:%S")
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mecho $TIME[27mecho $TIME
+[?2004l15:50:41
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mDATE_TIME="$DATE $TIME"[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CDATE_TIME="$DATE $TIME"
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mecho $DATE_TIME[27mecho $DATE_TIME
+[?2004l2025-03-12 15:50:41
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ ls \[K/bin /sbin | gre[[Kp ''[']'0]'-]'9]'
+[?2004lb2sum
+base32
+base64
+bunzip2
+bzip2
+bzip2recover
+cpan5.36-x86_64-linux-gnu
+diff3
+enc2xs
+grub-menulst2cfg
+grub-mkpasswd-pbkdf2
+grub-syslinux2cfg
+h2ph
+h2xs
+i386
+linux32
+linux64
+md5sum
+md5sum.textutils
+pdb3
+pdb3.11
+perl5.36.0
+perl5.36-x86_64-linux-gnu
+ping4
+ping6
+pl2pm
+pod2html
+pod2man
+pod2text
+pod2usage
+py3clean
+py3compile
+py3versions
+pydoc3
+pydoc3.11
+pygettext3
+pygettext3.11
+python3
+python3.11
+sha1sum
+sha224sum
+sha256sum
+sha384sum
+sha512sum
+ssh-argv0
+systemd-id128
+traceroute6
+traceroute6.db
+x86_64
+dumpe2fs
+e2freefrag
+e2fsck
+e2image
+e2label
+e2mmpsScript started on 2025-03-13 10:58:02+07:00 [TERM="screen.xterm-256color" TTY="/dev/pts/9" COLUMNS="80" LINES="24"]
+[?2004h[01;32meltex-pg2-v6@eltex[00m:[01;34m~[00m$ [7mexport PS1="\u@\h-\A> "[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexport PS1="\u@\h-\A> "
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?2004heltex-pg2-v6@eltex-10:59> [7mexport PS1="\u@\h-\$(date +'%H:%M')> "[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexport PS1="\u@\h-\$(date +'%H:%M')> "
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[7mmkdir -p ~/"$(date +%Y)"-{01..12}[27m
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmkdir -p ~/"$(date +%Y)"-{01..12}
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004l[?2004heltex-pg2-v6@eltex-11:03> ls
+[?2004l[0m[01;34m2025-01[0m  [01;34m2025-04[0m  [01;34m2025-07[0m  [01;34m2025-10[0m  [01;34mD1[0m                      ls
+[01;34m2025-02[0m  [01;34m2025-05[0m  [01;34m2025-08[0m  [01;34m2025-11[0m  eltex-pg2-v6_part3.log  report_part1.txt
+[01;34m2025-03[0m  [01;34m2025-06[0m  [01;34m2025-09[0m  [01;34m2025-12[0m  eltex-pg2-v6_part.log
+[?2004heltex-pg2-v6@eltex-11:03> учш[K[K[Kexit
+[?2004lexit
+
+Script done on 2025-03-13 11:04:48+07:00 [COMMAND_EXIT_CODE="0"]
