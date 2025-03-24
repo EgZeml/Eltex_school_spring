@@ -1,0 +1,115 @@
+root@eltex-practice2-pg2-v6:~# su - user1
+You are required to change your password immediately (password expired).
+Changing password for user1.
+Current password: 
+New password: 
+Retype new password: 
+user1@eltex-practice2-pg2-v6:~$ 
+
+user1@eltex-practice2-pg2-v6:~$ ps -eLo pid,tid | awk '{print $1}' | uniq -c | awk '$1 > 1' | wc -l
+10
+
+Попадаем в утилину top, нажимаем f и с помощью d включаем и отклчаем колонки. Затем выделяем RUSER и с помощью  s переносим его после USER
+Tasks: 116 total,   1 running, 115 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :   3916.0 total,   2793.5 free,    511.4 used,    888.7 buff/cache     
+MiB Swap:   3185.0 total,   3185.0 free,      0.0 used.   3404.6 avail Mem 
+
+    PID USER     RUSER     PR  NI S  %CPU  %MEM     TIME+ COMMAND               
+  33801 user1    user1     20   0 S   0.0   0.1   0:00.02 bash                  
+  33857 user1    user1     20   0 R   0.0   0.1   0:00.19 top                   
+  33931 user1    user1     20   0 S   0.0   0.1   0:00.01 bash                  
+  33941 root     user1     20   0 S   0.0   0.1   0:00.00 passwd                
+    675 systemd+ systemd+  20   0 S   0.0   0.2   0:01.89 systemd-timesyn       
+    674 systemd+ systemd+  20   0 S   0.0   0.3   0:00.84 systemd-resolve       
+    527 systemd+ systemd+  20   0 S   0.0   0.2   0:15.24 systemd-network       
+    728 syslog   syslog    20   0 S   0.0   0.2   0:00.51 rsyslogd              
+      1 root     root      20   0 S   0.0   0.3   0:12.36 systemd               
+      2 root     root      20   0 S   0.0   0.0   0:00.06 kthreadd              
+      3 root     root      20   0 S   0.0   0.0   0:00.00 pool_workqueue_relea+ 
+      4 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/R-rcu_g       
+      5 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/R-rcu_p       
+      6 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/R-slub_       
+      7 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/R-netns       
+     10 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/0:0H-events_+ 
+     12 root     root       0 -20 I   0.0   0.0   0:00.00 kworker/R-mm_pe       
+
+user1@eltex-practice2-pg2-v6:~$ passwd
+Changing password for user1.
+Current password: 
+
+После отправки сигнала 15 процесс завершился
+k → 33941 → Enter → 15 → Enter
+top - 05:50:15 up 11 days,  9:46,  2 users,  load average: 0.00, 0.00, 0.00
+Tasks: 115 total,   1 running, 114 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :   3916.0 total,   2793.8 free,    511.1 used,    888.7 buff/cache     
+MiB Swap:   3185.0 total,   3185.0 free,      0.0 used.   3405.0 avail Mem 
+
+    PID USER     RUSER     PR  NI S  %CPU  %MEM     TIME+ COMMAND               
+  33801 user1    user1     20   0 S   0.0   0.1   0:00.02 bash                  
+  33931 user1    user1     20   0 S   0.0   0.1   0:00.01 bash                  
+  33947 user1    user1     20   0 R   0.0   0.1   0:00.06 top                   
+
+user1@eltex-practice2-pg2-v6:~$ vim ~/file_task3.txt
+
+[1]+  Stopped                 vim ~/file_task3.txt
+user1@eltex-practice2-pg2-v6:~$ 
+
+user1@eltex-practice2-pg2-v6:~$ sleep 600
+^Z
+[2]+  Stopped                 sleep 600
+user1@eltex-practice2-pg2-v6:~$ jobs
+[1]-  Stopped                 vim ~/file_task3.txt
+[2]+  Stopped                 sleep 600
+user1@eltex-practice2-pg2-v6:~$ 
+
+user1@eltex-practice2-pg2-v6:~$ bg %2
+[2]+ sleep 600 &
+user1@eltex-practice2-pg2-v6:~$ jobs
+[1]+  Stopped                 vim ~/file_task3.txt
+[2]-  Running                 sleep 600 &
+
+user1@eltex-practice2-pg2-v6:~$ ps
+    PID TTY          TIME CMD
+  33801 pts/0    00:00:00 bash
+  33985 pts/0    00:00:00 vim
+  33988 pts/0    00:00:00 sleep
+  34003 pts/0    00:00:00 ps
+user1@eltex-practice2-pg2-v6:~$ renice 10 -p 33988
+33988 (process ID) old priority 0, new priority 10
+
+user1@eltex-practice2-pg2-v6:~$ ps -o pid,comm,nice -p 33988
+    PID COMMAND          NI
+  33988 sleep            10
+
+user1@eltex-practice2-pg2-v6:~$ jobs
+[1]+  Stopped                 vim ~/file_task3.txt
+[2]-  Running                 sleep 600 &
+user1@eltex-practice2-pg2-v6:~$ kill -15 %2
+user1@eltex-practice2-pg2-v6:~$ jobs
+[1]+  Stopped                 vim ~/file_task3.txt
+[2]-  Terminated              sleep 600
+
+user1@eltex-practice2-pg2-v6:~$ trap 'echo "Меня голыми руками не возьмёшь!"' SIGINT SIGQUIT
+
+# бесконечный цикл, чтобы ждать сигналов
+while true; do
+  sleep 1
+done
+
+user1@eltex-practice2-pg2-v6:~$ ps -u $(whoami) | grep bash
+  33801 pts/0    00:00:00 bash
+  33931 pts/1    00:00:00 bash
+user1@eltex-practice2-pg2-v6:~$ kill -SIGINT 33931
+user1@eltex-practice2-pg2-v6:~$ kill -SIGQUIT 33931
+
+user1@eltex-practice2-pg2-v6:~$ trap 'echo "Меня голыми руками не возьмёшь!"' SIGINT SIGQUIT
+
+# бесконечный цикл, чтобы ждать сигналов
+while true; do
+  sleep 1
+done
+Меня голыми руками не возьмёшь!
+Меня голыми руками не возьмёшь!
+
