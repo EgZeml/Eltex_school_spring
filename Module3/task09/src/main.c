@@ -3,159 +3,230 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <time.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
 #include <errno.h>
-#include <semaphore.h>
+#include <time.h>
 
-static const char *SEM_C2P = "/sem_c2p";  // Ребенок → родитель
-static const char *SEM_P2C = "/sem_p2c";  // Родитель → ребенок
+#define MAX_READERS 5
 
-// С помощью двух семафоров организовываем блокировку и доступ к файлу
+// Для управления двумя семафорами в одном наборе
+union semun {
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
+};
+
+/*
+=== Описание программы ===
+У нас есть читатели, писатель и генератор
+- Читатели (MAX_READERS дочерних процессов): читают число из файла
+- Писатель (родительский процесс): читает число из потока и записывает число в файл
+- Генератор (дочерний процесс): генерирует число и отправляет в поток
+Для синхронизации у нас есть 3 семафора:
+- sem_rw: Следит за работой с файлом
+- sem_data: Следит за готовностью данных
+- sem_bARRIER: Следит, что читатели корректно прочитали перед новой итерацией
+*/
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        fprintf(stderr, "Запуск: %s <количество чисел для генерации>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <количество чисел>\n", argv[0]);
         return EXIT_FAILURE;
     }
-
     int amount = atoi(argv[1]);
-    if (amount <= 0) { 
-        fprintf(stderr, "Количество должно быть >0\n"); 
-        return 1; 
+    if (amount <= 0) {
+        fprintf(stderr, "Количество должно быть > 0\n");
+        return EXIT_FAILURE;
     }
 
+    // 1) Pipe: генератор -> писатель
     int pipefd[2];
-    if (pipe(pipefd) == -1) { 
-        perror("pipe"); 
-        return 1; 
-    }
-
-    // 1) Создаем два семафора:
-    // Первый следит за тем, что число находится в потоке и родитель может его забрать
-    // Второе следит за тем, что родитель записал число в файл и дочерний может работать с файлом
-
-    // 1.1) Создаем семафор для слежения за готовностью числа
-    sem_t *sem_c2p = sem_open(SEM_C2P, O_CREAT | O_EXCL, 0666, 0);
-    if (sem_c2p == SEM_FAILED && errno == EEXIST) {
-        sem_c2p = sem_open(SEM_C2P, 0);
-    }
-    if (sem_c2p == SEM_FAILED) {
-        perror("sem_open sem_c2p");
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
         return EXIT_FAILURE;
     }
 
-    // 1.2) Создаем семафор для слежения за готовностью файла
-    sem_t *sem_p2c = sem_open(SEM_P2C, O_CREAT | O_EXCL, 0666, 0);
-    if (sem_p2c == SEM_FAILED && errno == EEXIST) {
-        sem_p2c = sem_open(SEM_P2C, 0);
+    // 2) Создаем набор из двух семафоров
+    // semid[0] = sem_rw, semid[1] = sem_data
+    key_t key = ftok(".", 'R');
+    if (key == -1) {
+        perror("ftok");
+        return EXIT_FAILURE;
     }
-    if (sem_p2c == SEM_FAILED) {
-        perror("sem_open sem_p2c");
-        // Удаляем открый ранее семафор
-        sem_close(sem_c2p);
-        sem_unlink(SEM_C2P);
+    int semid = semget(key, 3, IPC_CREAT | 0666);
+    if (semid == -1) {
+        perror("semget");
+        return EXIT_FAILURE;
+    }
+    union semun arg;
+    // sem_rw = MAX_READERS (по умолчанию пустые слоты для читателей)
+    arg.val = MAX_READERS;
+    if (semctl(semid, 0, SETVAL, arg) == -1) {
+        perror("semctl SETVAL sem_rw");
+        return EXIT_FAILURE;
+    }
+    // sem_data = 0 (ни одни данные ещё не готовы)
+    arg.val = 0;
+    if (semctl(semid, 1, SETVAL, arg) == -1) {
+        perror("semctl SETVAL sem_data");
+        return EXIT_FAILURE;
+    }
+    arg.val = 0;
+    if (semctl(semid, 2, SETVAL, arg) == -1) {
+        perror("semctl SETVAL sem_bARRIER");
         return EXIT_FAILURE;
     }
 
-    // 2) Создаем дочерний прочесс
-    pid_t pid = fork();
-    if (pid == -1) { 
-        perror("fork"); 
-        return 1; 
+    // Подготовим операции
+    // Cемафор 0: читатель - писатель
+    struct sembuf P_reader   = { 0, -1, 0 };
+    struct sembuf V_reader   = { 0, +1, 0 };
+    struct sembuf P_writer   = { 0, -MAX_READERS, 0 };
+    struct sembuf V_writer   = { 0, +MAX_READERS, 0 };
+    // Семафор 1: готовность данных
+    struct sembuf P_data     = { 1, -1, 0 };
+    struct sembuf V_data     = { 1, +1, 0 };
+    // Семафор 2: читатели прочитали
+    struct sembuf V_barrier  = {2, +1, 0};      // reader ⇒ writer: я прочитал
+    struct sembuf P_barrier  = {2, -MAX_READERS,0}; // writer ждёт всех чтений
+
+
+    // 3) Форкаем MAX_READERS читателей
+    for (int i = 0; i < MAX_READERS; ++i) {
+        pid_t pid = fork();
+        if (pid < 0) {
+            perror("fork reader");
+            return EXIT_FAILURE;
+        }
+        if (pid == 0) {
+            // Дочерний процесс (читатель)
+            close(pipefd[0]);
+            close(pipefd[1]);
+            for (int j = 0; j < amount; ++j) {
+                // 1) Ждем сигнала «данные готовы»
+                if (semop(semid, &P_data, 1) == -1) {
+                    perror("reader P_data");
+                    exit(EXIT_FAILURE);
+                }
+                // 2) Входим в чтение (P_reader)
+                if (semop(semid, &P_reader, 1) == -1) {
+                    perror("reader P_reader");
+                    exit(EXIT_FAILURE);
+                }
+
+                // 3) Читаем j-ый элемент из файла
+                int fd = open("output.dat", O_RDONLY);
+                if (fd < 0) {
+                    perror("reader open");
+                    semop(semid, &V_reader, 1);
+                    exit(EXIT_FAILURE);
+                }
+                int val;
+                ssize_t r = pread(fd, &val, sizeof val, j * sizeof val);
+                if (r == sizeof val) {
+                    printf("[Процесс %d] a[%d] = %d\n", i, j, val);
+                } else {
+                    fprintf(stderr, "[Процесс %d] нет данных на позиции %d\n",
+                            i, j);
+                }
+                close(fd);
+
+                // 4) Выходим из чтения (V_reader)
+                if (semop(semid, &V_reader, 1) == -1) {
+                    perror("reader V_reader");
+                    exit(EXIT_FAILURE);
+                }
+
+                // 4) Выходим из чтения (V_reader)
+                if (semop(semid, &V_barrier, 1) == -1) {
+                    perror("reader V_reader");
+                    exit(EXIT_FAILURE);
+                }
+                
+            }
+            exit(EXIT_SUCCESS);
+        }
+        // родитель продолжает форкать
     }
 
-    if (pid == 0) {
-        // ---------- Дочерний процесс ----------
+    // 4) Форкаем дочерний процесс (генератор)
+    pid_t pid_gen = fork();
+    if (pid_gen < 0) {
+        perror("fork generator");
+        return EXIT_FAILURE;
+    }
+    if (pid_gen == 0) {
+        // --- код генератора чисел ---
         close(pipefd[0]);
-
         srand(time(NULL) ^ getpid());
-
-        for (int i = 0; i < amount; ++i) {
-            int val = rand();
-            if (write(pipefd[1], &val, sizeof val) != sizeof val) {
-                perror("child write"); 
+        for (int j = 0; j < amount; ++j) {
+            int x = rand();
+            if (write(pipefd[1], &x, sizeof x) != sizeof x) {
+                perror("generator write");
                 break;
             }
-
-            // 3) С помощью семафоров сообщаем о готовности числа 
-            // 3.1) Сообщаем родителю, что число готово
-            if (sem_post(sem_c2p) < 0) {
-                perror("child sem_post(c2p)");
-                break;
-            }
-
-            // 3.2) Ждём, пока родитель запишет в файл
-            if (sem_wait(sem_p2c) < 0) {
-                perror("child sem_wait(p2c)");
-                break;
-            }
-        
-            // Открываем файл для чтения
-            int fd = open("output.dat", O_RDONLY);
-            if (fd == -1) { 
-                perror("child open"); 
-                break; }
-
-            int tmp;
-            // Читаем последнее (новое) число в файле
-            ssize_t r = pread(fd, &tmp, sizeof tmp, i * sizeof tmp);
-            if (r == sizeof tmp) {
-                printf("Child read file[%d] = %d\n", i, tmp);
-            } else if (r == 0) {
-                fprintf(stderr, "Child: файл ещё не содержит данных на позиции %d\n", i);
-            } else {
-                perror("child pread");
-            }
-                        
-            close(fd);
         }
         close(pipefd[1]);
-        sem_close(sem_c2p);
-        sem_close(sem_p2c);
-        return EXIT_SUCCESS;
-    } else {
-        // ---------- Родительский процесс ---------- 
-        close(pipefd[1]);
-
-        int fd = open("output.dat", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (fd == -1) { 
-            perror("parent open"); 
-            return 1; 
-        }
-
-        for (int i = 0; i < amount; ++i) {
-            // 4) С помощью семафоров получаем момент, когда число готово и записываем его в файл
-            // 4.1) Ждём от ребёнка готовности числа
-            if (sem_wait(sem_c2p) < 0) {
-                perror("parent sem_wait(c2p)");
-                break;
-            }
-            int num;
-            if (read(pipefd[0], &num, sizeof num) != sizeof num) {
-                perror("parent read"); 
-                break;
-            }
-            printf("Parent received[%d] = %d\n", i, num);
-            if (write(fd, &num, sizeof num) != sizeof num) {
-                perror("parent write");
-            }
-            // Сбросить буфер в файл
-            fsync(fd);
-            // 4.2) Сигнал ребенку, что файл обновлён
-            if (sem_post(sem_p2c) < 0) {
-                perror("parent sem_post(p2c)");
-                break;
-            }
-        }
-        close(fd);
-        close(pipefd[0]);
-        waitpid(pid, NULL, 0);
-
-        sem_close(sem_c2p);
-        sem_close(sem_p2c);
-        sem_unlink(SEM_C2P);
-        sem_unlink(SEM_P2C);
-        return EXIT_SUCCESS;
+        exit(EXIT_SUCCESS);
     }
+
+    // 5) Родитель (писатель)
+    close(pipefd[1]);
+    int fd = open("output.dat", O_CREAT | O_TRUNC | O_RDWR, 0644);
+    if (fd < 0) {
+        perror("writer open");
+        return EXIT_FAILURE;
+    }
+
+    for (int j = 0; j < amount; ++j) {
+        // 5.1) Читаем следующее число из pipe
+        int x;
+        if (read(pipefd[0], &x, sizeof x) != sizeof x) {
+            perror("writer read pipe");
+            break;
+        }
+
+        // 5.2) Захватываем доступ (ждём, пока нет читателей)
+        if (semop(semid, &P_writer, 1) == -1) {
+            perror("writer P_writer");
+            break;
+        }
+
+        // 5.3) Записываем в файл
+        if (write(fd, &x, sizeof x) != sizeof x) {
+            perror("writer write file");
+        } else {
+            printf("[Writer] a[%d] = %d\n", j, x);
+        }
+        fsync(fd);
+
+        // 5.4) Освобождаем всех читателей
+        if (semop(semid, &V_writer, 1) == -1) {
+            perror("writer V_writer");
+            break;
+        }
+        // 5.5) Сигналим data-ready — каждому читателю по 1 «единице»
+        for (int r = 0; r < MAX_READERS; ++r) {
+            if (semop(semid, &V_data, 1) == -1) {
+                perror("writer V_data");
+                break;
+            }
+        }
+
+        // Ждём, пока все N читателей не поставят свой +1 в sem_bARRIER
+        semop(semid, &P_barrier, 1);      
+    }
+
+    // Закрываем и чистим
+    close(fd);
+    close(pipefd[0]);
+    // ждём всех потомков (генератор + MAX_READERS читателей)
+    while (wait(NULL) > 0) { }
+    // удаляем семафоры
+    if (semctl(semid, 0, IPC_RMID) == -1) {
+        perror("semctl IPC_RMID");
+    }
+
+    return EXIT_SUCCESS;
 }
